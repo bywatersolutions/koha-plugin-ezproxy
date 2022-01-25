@@ -1,0 +1,42 @@
+{
+  "/patron/check": {
+    "get": {
+      "x-mojo-to": "Com::ByWaterSolutions::EZProxy::ApiController#check",
+      "operationId": "CheckPatron",
+      "tags": ["opac", "patron"],
+      "parameters": [
+        {
+          "description": "Username",
+          "in": "query",
+          "name": "user",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "Password",
+          "in": "query",
+          "name": "pass",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "produces": [
+        "text/html"
+      ],
+      "responses": {
+        "200": {
+          "description": "OK if auth success, ERROR if auth failure"
+        },
+        "400": {
+          "description": "Bad request"
+        },
+        "403": {
+          "description": "Permission denied"
+        },
+        "500": {
+          "description": "Internal server error"
+        }
+      }
+    }
+  }
+}
