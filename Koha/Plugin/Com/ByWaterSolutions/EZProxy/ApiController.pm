@@ -18,7 +18,7 @@ package Koha::Plugin::Com::ByWaterSolutions::EZProxy::ApiController;
 use Modern::Perl;
 
 use C4::Context;
-use C4::Auth qw(checkauth);
+use C4::Auth qw(checkpw);
 
 use Mojo::Base 'Mojolicious::Controller';
 use Mojo::JSON qw(decode_json);
@@ -42,11 +42,11 @@ Method that adds a new order from a GOBI request
 sub check {
     my $c = shift->openapi->valid_input or return;
 
-    my $username = $c->validation->param('username');
-    my $password = $c->validation->param('password');
+    my $username = $c->validation->param('user');
+    my $password = $c->validation->param('pass');
 
     return try {
-        my ( $retval ) = checkpw( C4::Context->dbh, $username, $password );
+        my ($retval) = checkpw( C4::Context->dbh, $username, $password );
 
         return $c->render(
             status => 200,
